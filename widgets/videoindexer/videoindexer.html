@@ -21,10 +21,16 @@
         <hr>
         <div class="row align-items-start">
             <div class="col .col-sm-2" ng-repeat="video in videos">
-                <img class="video-img" src="{{video.thumbnailUrl}}"/>
+                <img class="video-img-rot" src="{{video.thumbnailUrl}}" ng-click="onVideoClick(video)"/>
             </div>
         </div>
         <hr>
+        <div class="row no-gutters">
+            <div class="col-2 col-md-2">
+                <img class="video-img" src="{{current.thumbnailUrl}}"/>
+            </div>
+            <div class="col-12 col-sm-6 col-md-8">.col-12 .col-sm-6 .col-md-8</div>
+        </div>
     </div>
 </body>
 </html>
