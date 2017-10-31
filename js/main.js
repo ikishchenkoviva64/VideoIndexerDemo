@@ -1,19 +1,27 @@
-const BASE_URL = "dev-moshe:3000/api";
+const BASE_URL = "http://dev-moshe:3000/api";
 
 $(function() {
 
     const loadAllVideoIds = function(callback) {
         $.ajax({
-            url: BASE_URL + "/videoIds",
-            context: document.body
-        }).done(callback);
+            type: "GET",
+            dataType: 'text',
+            url: BASE_URL + "/videoIds"
+        }).done(callback)
+            .fail(function() {
+                alert("error");
+            });
     };
 
     const loadVideoData = function(id, callback) {
         $.ajax({
+            type: "GET",
+            dataType: 'text',
             url: BASE_URL + "/videoData/" + id,
-            context: document.body
-        }).done(callback);
+            success: callback,
+            fail: function(){
+                alert('Failed to pass request');
+            }
+        });
     };
-
 });
