@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+     <!--jQuery and jQuery UI-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+
+    <!--Widgets-->
+    <script src="./clickImage.js"></script>
+    <link rel="stylesheet" href="./style.css">
+    <title>Click image demo</title>
+</head>
+<style>
+    .container {
+        width: 1400px;
+        height: 800px;
+        background-color: rebeccapurple;
+    }
+</style>
+<script>
+    $(function() {
+        $('.test-element').clickImage({
+            title: 'Default title'
+        });
+    });
+</script>
+<body>
+<div class="container">
+    <div class="test-element"></div>
+</div>
+
+</body>
+</html>
