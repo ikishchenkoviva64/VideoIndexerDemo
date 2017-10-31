@@ -6,7 +6,7 @@ function map(collection,func) {
 function filter(collection,predicate){
 	var rc = []
 	collection.forEach(function(i){
-		if(predicate(i) {
+		if(predicate(i)) {
 			rc.push(i);
 		}
 	});
@@ -14,41 +14,48 @@ function filter(collection,predicate){
 }
 function getAudioEffectCategories(doc){
 	var rs = [];
-	doc.insights.audioEffectsCategories.forEach(c=>rs.push({"key":c.key,"type":c.type}));
+	doc.insights.audioEffectsCategories.forEach(function(c){
+		rs.push({"key":c.key,"type":c.type});
+    });
 	return rs;
 }
 
 function getAllParticipants(doc) {
 	var rs = [];
-	doc.insights.participants.forEach(c=>rs.push({"id":c.id,"name":c.name,"pictureUrl":c.pictureUrl}));
+	doc.insights.participants.forEach(function (c) {
+        rs.push({"id":c.id,"name":c.name,"pictureUrl":c.pictureUrl});
+	});
 	return rs;
 }
 
 function getFaces(doc) {
 	var rs = [];
-	doc.insights.faces.forEach(f=>rs.push({
+	doc.insights.faces.forEach(function(f){rs.push(
+		{
 		"id":f.id,
 		"bingId":f.bingId,
 		"confidence":f.confidence,
-		"description",f.description,
+		"description":f.description,
 		"imageUrl":f.imageUrl,
 		"knownPersonId":f.knownPersonId,
 		"name":f.name,
 		"thumbnailId":f.thumbnailId,
-		"title":f.title
-	}));
+		"title":f.title});
+	});
 	return rs;
 }
 
 function topics(doc) {
 	var rs = [];
-	doc.insights.topics.forEach(t=>rs.push({
-		"id"   : t.id,
-		"name" : t.name,
-		"stem" : t.stem,
-		"rank" : t.rank,
-		"words": t.words
-	}));
+	doc.insights.topics.forEach(function (t) {
+        rs.push({
+            "id": t.id,
+            "name": t.name,
+            "stem": t.stem,
+            "rank": t.rank,
+            "words": t.words
+        })
+    });
 	return rs;
 }
 
