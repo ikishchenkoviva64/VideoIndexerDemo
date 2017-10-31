@@ -14,22 +14,36 @@
 </head>
 <style>
     .container {
-        width: 1400px;
-        height: 800px;
+        width: 60%;
+        height: 600px;
         background-color: rebeccapurple;
     }
 </style>
 <script>
     $(function() {
-        $('.test-element').clickImage({
-
+        const clickImageEl = $('.test-element').clickImage({
+            title: "I`m really crazy penguin!",
+            onClick: function () {
+                alert("DO NOT PUSH ME!");
+            }
+        });
+        $(".image-button-click").button();
+        $(".image-button-click").click(function (event) {
+            clickImageEl.clickImage('clickMethod', 'This is SPARTAAAA!!!');
         });
     });
 </script>
 <body>
-<div class="container">
-    <div class="test-element"></div>
+<div align="center" >
+    <div class="container" align="center">
+        </br>
+        <div class="test-element"></div>
+        </br>
+        <div class="image-button-click">Click Me</div>
+        </br>
+        <iframe allowfullscreen="" frameborder="0" width="100%" height="100%" src="https://www.videoindexer.ai/embed/insights/c4c1ad4c9a/?utm=blog"></iframe>
+        </br>
+    </div>
 </div>
-
 </body>
 </html>

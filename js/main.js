@@ -1,7 +1,6 @@
 const BASE_URL = "http://dev-moshe:3000/api";
 
 $(function() {
-
     const loadAllVideoIds = function(callback) {
         $.ajax({
             type: "GET",

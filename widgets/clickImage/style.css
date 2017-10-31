@@ -1,0 +1,34 @@
+.click-image {
+    height: 160px;
+    width: 160px;
+}
+
+.click-image .click-image-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    display: block;
+    margin: auto;
+    border: 2px solid white;
+    -webkit-animation: rotation 4s infinite linear;
+}
+
+.click-image .click-image-img:hover {
+    cursor: pointer;
+    border: 2px solid lightgrey;
+}
+
+@-webkit-keyframes rotation {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(359deg); }
+}
+
+#appearance2 .rs-range-color  {
+    background-color: #ff8d00;
+}
+#appearance2 .rs-handle:after  {
+    background-color: #000000;
+}
+#appearance2 .rs-border  {
+    border-color: #ff8d00;
+}
