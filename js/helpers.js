@@ -40,7 +40,7 @@ function hasFaceData(transcriptBlock) {
  * filter functions
  *
 */
-function getBlocksWithNnnEmptyLines(transcriptBlocks) {
+function getBlocksWithNonEmptyLines(transcriptBlocks) {
     return filter(transcriptBlocks,isNonEmptyLines);
 }
 function getBlockWithNonEmptyOCRs(transcriptBlocks) {
@@ -53,6 +53,9 @@ function getBlocksWithFaces(transcriptBlocks) {
  * end of filter functions
  *
 */
+function getTranscriptBlocksData(doc) {
+    return doc.insights.transcriptBlocks;
+}
 function getAudioEffectCategories(doc){
 	var rs = [];
 	doc.insights.audioEffectsCategories.forEach(function(c){
