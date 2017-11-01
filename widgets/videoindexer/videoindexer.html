@@ -14,22 +14,55 @@
 <body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-    <script src="videoindexer.js"></script>
+    <script src="./videoindexer.js"></script>
 
-    <div class="container" ng-controller="DaletVideoIndexerVideos">
+    <div class="container-fluid" ng-controller="DaletVideoIndexerVideos">
         <h5>Dalet Video Indexer</h5>
         <hr>
-        <div class="row align-items-start">
-            <div class="col .col-sm-2" ng-repeat="video in videos">
+        <div class="row">
+            <div class="col-fluid" ng-repeat="video in videos">
                 <img class="video-img-rot" src="{{video.thumbnailUrl}}" ng-click="onVideoClick(video)"/>
             </div>
         </div>
         <hr>
-        <div class="row no-gutters">
-            <div class="col-2 col-md-2">
-                <img class="video-img" src="{{current.thumbnailUrl}}"/>
-            </div>
-            <div class="col-12 col-sm-6 col-md-8">.col-12 .col-sm-6 .col-md-8</div>
+        <div class="row align-top">
+            <table style="width:100%">
+                <tr>
+                    <th class="align-top" style="width: 250px">
+                        <div class="progress-pie-chart">
+                            <div class="ppc-progress">
+                                <div class="ppc-progress-fill"></div>
+                            </div>
+                            <img class="ppc-percents" src="{{current.thumbnailUrl}}">
+                            <div class="pcc-percents-wrapper"/>
+                            </img>
+                        </div>
+                    </th>
+                    <th class="align-top">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="page-header">
+                                        <h2>{{current.accountId}}</h2>
+                                    </div>
+                                    <div style="display:inline-block;width:100%;overflow-y:auto;">
+                                        <ul class="timeline timeline-horizontal">
+                                            <li class="timeline-item" ng-repeat="timeItem in current.insights.transcriptBlocks">
+                                                <div class="timeline-badge primary"><i class="glyphicon glyphicon-check"></i></div>
+                                                <div class="timeline-panel">
+                                                    <div class="timeline-body">
+                                                        <p>{{timeItem.id}}</p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </th>
+                </tr>
+            </table>
         </div>
     </div>
 </body>

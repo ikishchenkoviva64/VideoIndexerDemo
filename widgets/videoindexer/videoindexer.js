@@ -30,6 +30,17 @@ angular.module('daletVideoIndexer', [])
         $scope.onVideoClick = function(video) {
             console.log(video.id);
             $scope.current = video;
+            $(function(){
+                console.log(video.processingProgress);
+                var $ppc = $('.progress-pie-chart'), percent = parseInt(video.processingProgress), deg = 360*percent/100;
+                console.log(deg);
+                if (percent > 50) {
+                    $ppc.addClass('gt-50');
+                } else {
+                    $ppc.removeClass('gt-50');
+                }
+                $('.ppc-progress-fill').css('transform','rotate('+ deg +'deg)');
+            });
         };
 
         $scope.loadAllVideoIds(function (tmpVideos) {
