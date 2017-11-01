@@ -19,7 +19,6 @@ function getAudioEffectCategories(doc){
     });
 	return rs;
 }
-
 function getAllParticipants(doc) {
 	var rs = [];
 	doc.insights.participants.forEach(function (c) {
@@ -27,7 +26,6 @@ function getAllParticipants(doc) {
 	});
 	return rs;
 }
-
 function getFaces(doc) {
 	var rs = [];
 	doc.insights.faces.forEach(function(f){rs.push(
@@ -44,7 +42,6 @@ function getFaces(doc) {
 	});
 	return rs;
 }
-
 function topics(doc) {
 	var rs = [];
 	doc.insights.topics.forEach(function (t) {
@@ -58,8 +55,44 @@ function topics(doc) {
     });
 	return rs;
 }
-
 function getWordsFromTopic(topic) {
 	var obj = [];
 	return topic.words[0].split(" ");
+}
+
+function getAllAnnotations(doc) {
+    var rs = [];
+    doc.insights.transcriptBlocks.forEach(function (b) {
+        b.annotations.forEach(
+            function (a) {
+                rs.push(
+                    {
+                        "transcriptBlock":b.id,
+                        "name": a.name,
+                        "timeRanges":function () {
+                            var extractedRanges = []
+                            a.timeRanges.forEach(function (r) {
+                                extractedRanges.push({
+                                    "start": r.start,
+                                    "end":r.end
+                                });
+                            });
+                            return extractedRanges;
+                        },
+                        "adjustedTimeRanges":function () {
+                            var extractedRanges = []
+                            a.adjustedTimeRanges.forEach(function (r) {
+                                extractedRanges.push({
+                                    "start": r.start,
+                                    "end":r.end
+                                });
+                            });
+                            return extractedRanges;
+                        }
+                    }
+                );
+            }
+        )
+    })
+    return rs;
 }
