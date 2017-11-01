@@ -1,3 +1,6 @@
+/*
+* collection helpers
+*/
 function map(collection,func) {
 	var rc = []
 	collection.forEach(function(i){rc.push(f(i));});
@@ -12,6 +15,44 @@ function filter(collection,predicate){
 	});
 	return rc;
 }
+
+/*
+* end of collection helpers
+*/
+/*
+* Helper predicates for data
+*/
+function isNonEmptyLines(transcriptBlock){
+    return transcriptBlock.lines.length > 0;
+}
+function isNonEmptyOCRs(transcriptBlock) {
+return transcriptBlock.ocrs.length > 0;
+}
+function hasFaceData(transcriptBlock) {
+    return transcriptBlock.faces.length > 0;
+}
+
+/*
+* end of helper predicates for data
+*/
+
+/*
+ * filter functions
+ *
+*/
+function getBlocksWithNnnEmptyLines(transcriptBlocks) {
+    return filter(transcriptBlocks,isNonEmptyLines);
+}
+function getBlockWithNonEmptyOCRs(transcriptBlocks) {
+    return filter(transcriptBlocks,isNonEmptyOCRs);
+}
+function getBlocksWithFaces(transcriptBlocks) {
+    return filter(transcriptBlocks,hasFaceData);
+}
+/*
+ * end of filter functions
+ *
+*/
 function getAudioEffectCategories(doc){
 	var rs = [];
 	doc.insights.audioEffectsCategories.forEach(function(c){
@@ -55,11 +96,35 @@ function topics(doc) {
     });
 	return rs;
 }
+
 function getWordsFromTopic(topic) {
 	var obj = [];
 	return topic.words[0].split(" ");
 }
 
+function getKeywords(doc) {
+    var keywords = [];
+    var parsedTopics = topics(doc);
+    parsedTopics.forEach(function (t) {
+        keywords.push({
+            "topicId":t.id,
+            "keyword":t.words
+        });
+    });
+    return  keywords;
+}
+
+/**
+ *
+ * @param doc json response
+ * @returns returns {Array} of annotation like a dictionary of the following structure
+ *  {
+ *   "transcriptBlockId" : (number)
+ *   "name"              : (string)
+ *   "timeRanges"        : [TimeRange]
+     "adjustedTimeRanges": [TimeRange]
+ *   }
+ */
 function getAllAnnotations(doc) {
     var rs = [];
     doc.insights.transcriptBlocks.forEach(function (b) {
@@ -86,7 +151,8 @@ function getAllAnnotations(doc) {
                         "transcriptBlockId":b.id,
                         "name": a.name,
                         "timeRanges": extractedRangesCommon,
-                        "adjustedTimeRanges": extractedRangesAdjusted                    }
+                        "adjustedTimeRanges": extractedRangesAdjusted
+                    }
                 );
             }
         )
