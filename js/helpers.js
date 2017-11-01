@@ -65,31 +65,28 @@ function getAllAnnotations(doc) {
     doc.insights.transcriptBlocks.forEach(function (b) {
         b.annotations.forEach(
             function (a) {
+                var extractedRangesCommon = [];
+                var extractedRangesAdjusted = [];
+                a.timeRanges.forEach(function (r) {
+                        extractedRangesCommon.push({
+                            "start": r.start,
+                            "end": r.end
+                        });
+
+                    }
+                );
+                a.adjustedTimeRanges.forEach(function (r) {
+                    extractedRangesAdjusted.push({
+                        "start": r.start,
+                        "end":r.end
+                    });
+                });
                 rs.push(
                     {
-                        "transcriptBlock":b.id,
+                        "transcriptBlockId":b.id,
                         "name": a.name,
-                        "timeRanges":function () {
-                            var extractedRanges = []
-                            a.timeRanges.forEach(function (r) {
-                                extractedRanges.push({
-                                    "start": r.start,
-                                    "end":r.end
-                                });
-                            });
-                            return extractedRanges;
-                        },
-                        "adjustedTimeRanges":function () {
-                            var extractedRanges = []
-                            a.adjustedTimeRanges.forEach(function (r) {
-                                extractedRanges.push({
-                                    "start": r.start,
-                                    "end":r.end
-                                });
-                            });
-                            return extractedRanges;
-                        }
-                    }
+                        "timeRanges": extractedRangesCommon,
+                        "adjustedTimeRanges": extractedRangesAdjusted                    }
                 );
             }
         )
